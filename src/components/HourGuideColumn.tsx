@@ -14,7 +14,7 @@ interface HourGuideColumnProps {
   hourComponent:React.ReactElement | null
 }
 
-const _HourGuideColumn = ({ cellHeight, hour, ampm, hourStyle = {},hourComponent = null }: HourGuideColumnProps) => {
+const _HourGuideColumn = ({ cellHeight, hour, ampm, hourStyle = {}, hourComponent = null  }: HourGuideColumnProps) => {
   const theme = useTheme()
   const textStyle = React.useMemo(
     () => ({ color: theme.palette.gray[500], fontSize: theme.typography.xs.fontSize }),
@@ -22,13 +22,17 @@ const _HourGuideColumn = ({ cellHeight, hour, ampm, hourStyle = {},hourComponent
   )
 
   return (
-    <>{hourComponent !== null ? <View>{hourComponent({hours:formatHour(hour, ampm)})} </View> : <View style={{ height: cellHeight }}>
-    <Text style={[objHasContent(hourStyle) ? hourStyle : textStyle, u['text-center']]}>
-      {formatHour(hour, ampm)}
-    </Text>
-  </View>}</>
-  
+    <>
+      {hourComponent !== null ? (
+        <View>{hourComponent({ hours: formatHour(hour, ampm) })}</View>
+      ) : (
+        <View style={{ height: cellHeight }}>
+          <Text style={[objHasContent(hourStyle) ? hourStyle : textStyle, u['text-center']]}>
+            {formatHour(hour, ampm)}
+          </Text>
+        </View>
+      )}
+    </>
   )
 }
-
 export const HourGuideColumn = React.memo(_HourGuideColumn, () => true)
