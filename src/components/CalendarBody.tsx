@@ -54,7 +54,7 @@ interface CalendarBodyProps<T extends ICalendarEventBase> {
   headerComponent?: React.ReactElement | null
   headerComponentStyle?: ViewStyle
   hourStyle?: TextStyle
-  hourComponent?: React.ReactElement | null
+  hourComponent?: (formattedHour: string) => React.ReactNode;
   hideHours?: Boolean
   isEventOrderingEnabled?: boolean
 }
@@ -79,7 +79,7 @@ function _CalendarBody<T extends ICalendarEventBase>({
   headerComponent = null,
   headerComponentStyle = {},
   hourStyle = {},
-  hourComponent = null,
+  hourComponent,
   hideHours = false,
   isEventOrderingEnabled = true,
 }: CalendarBodyProps<T>) {
